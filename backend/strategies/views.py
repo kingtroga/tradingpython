@@ -138,12 +138,22 @@ class BacktestResultViewSet(viewsets.ModelViewSet):
                 
                 # Create daily snapshot
                 try:
+                    daily_return_pct = 0.00
+                    if i == 0:
+                        daily_return_pct = 0.00
+                    else:
+                        prev_snapshots = DailyPortfolioSnapshot.objects.filter(backtest=backtest).order_by('-date')
+                        if prev_snapshots.exists():
+                            prev_value = float(prev_snapshots.first().total_portfolio_value)
+                            daily_return_pct = ((portfolio_value - prev_value) / prev_value) * 100
+                        else:
+                            daily_return_pct = 0.00
                     DailyPortfolioSnapshot.objects.create(
                         backtest=backtest,
                         date=date.date(),
                         total_portfolio_value=Decimal(str(round(portfolio_value, 2))),
                         cash_balance=Decimal(str(round(cash, 2))),
-                        daily_return=Decimal('0.00'),
+                        daily_return=Decimal(daily_return_pct),
                         peak_portfolio_value=Decimal(str(round(peak_value, 2))),
                         drawdown=Decimal(str(round(drawdown, 2))),
                         open_positions_count=1 if position is not None else 0

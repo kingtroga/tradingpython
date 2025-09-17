@@ -22,6 +22,24 @@ This report analyzes the performance of the 20/50-day Moving Average Crossover s
 | GOOGL | -6.32%      | -$631.60   | 3      | -6.32%       | 0%       | -$210.53         |
 
 ## Detailed Stock Analysis
+### Sharpe Ratio Analysis
+
+| Stock | Avg Daily Return | Daily Volatility | Sharpe Ratio | Risk Assessment |
+|-------|------------------|------------------|---------------|-----------------|
+| AAPL  | 0.014%          | 0.30%           | 0.77          | Good risk-adjusted return |
+| AMZN  | 0.027%          | 0.56%           | 0.84          | Best risk-adjusted return |
+| GOOGL | -0.032%         | 0.24%           | -2.13         | Poor risk-adjusted return |
+| MSFT  | -0.018%         | 0.26%           | -1.12         | Negative risk-adjusted return |
+| TSLA  | 0.035%          | 1.51%           | 0.36          | High return but excessive volatility |
+
+**Sharpe Ratio Insights:**
+- **AMZN leads** with 0.84 Sharpe ratio - highest return per unit of risk
+- **AAPL second** at 0.77 - solid risk-adjusted performance  
+- **TSLA lowest positive** at 0.36 - high returns offset by extreme volatility (1.51% daily)
+- **GOOGL and MSFT negative** - generated losses with meaningful volatility
+- **Industry benchmark:** Sharpe ratios above 0.5 are generally considered good for equity strategies
+
+The analysis confirms AMZN and AAPL as the strategy's best performers on a risk-adjusted basis, while TSLA's high absolute returns come with disproportionate volatility risk.
 
 ### AMZN (Best Performer)
 - **Return:** +5.30% ($529.51 profit)
