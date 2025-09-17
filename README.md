@@ -65,6 +65,20 @@ trading-strategy-api/
 - Node.js 16+
 - PostgreSQL 13+
 
+### UV Setup (Recommended)
+```bash
+# Install UV
+pip install uv
+
+# Install dependencies
+uv sync
+
+# Run Django server
+uv run python manage.py runserver
+
+# Run migrations
+uv run python manage.py migrate
+
 ### Backend Setup
 
 1. **Clone the repository**
@@ -252,31 +266,8 @@ See [SCHEMA_DESIGN.md](SCHEMA_DESIGN.md) for detailed schema documentation.
 - `task-4-react-frontend` - Web interface and charts
 
 ### Commit Strategy
-Each task is implemented incrementally with clear commit messages:
-```bash
-git checkout -b task-1-basic-strategy
-# Implement basic strategy
-git add .
-git commit -m "feat: implement basic MA crossover strategy"
+Each task is implemented incrementally with clear commit
 
-git checkout -b task-2-risk-management
-# Add risk management
-git add .
-git commit -m "feat: add stop-loss and take-profit logic"
-```
-
-## Testing
-
-### Backend Tests
-```bash
-python manage.py test strategies
-```
-
-### Frontend Tests
-```bash
-cd frontend
-npm test
-```
 
 ## Deployment
 

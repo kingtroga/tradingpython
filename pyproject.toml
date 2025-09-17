@@ -1,0 +1,14 @@
+[project]
+name = "tradingpython"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10.5"
+dependencies = [
+    "django==5.2.6",
+    "django-cors-headers==4.8.0",
+    "djangorestframework==3.16.1",
+    "pandas==2.3.2",
+    "psycopg2-binary==2.9.10",
+    "yfinance==0.2.66",
+]
