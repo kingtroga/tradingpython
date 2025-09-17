@@ -24,6 +24,31 @@ class BacktestResultViewSet(viewsets.ModelViewSet):
     queryset = BacktestResult.objects.all()
     serializer_class = BacktestResultSerializer
 
+    @action(detail=False, methods=['post'])
+    def run_backtest(self, request):
+        """Run a new backtest"""
+        serializer = BacktestCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            result = self._execute_backtest(serializer.validated_data)
+            return Response(BacktestResultSerializer(result).data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=['get'])
+    def trades(self, request, pk=None):
+        """Get trades for a specific backtest"""
+        backtest = self.get_object()
+        trades = Trade.objects.filter(backtest=backtest)
+        serializer = TradeSerializer(trades, many=True)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['get'])
+    def daily_snapshots(self, request, pk=None):
+        """Get daily snapshots for charts"""
+        backtest = self.get_object()
+        snapshots = DailyPortfolioSnapshot.objects.filter(backtest=backtest)
+        serializer = DailyPortfolioSnapshotSerializer(snapshots, many=True)
+        return Response(serializer.data)
+
     def _execute_backtest(self, params):
         """Execute the moving average crossover backtest with debug logging"""
         logger.info(f"Starting backtest for {params['stock_symbol']}")
